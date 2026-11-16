@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lanternfall — Keeper of the Last Light</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<canvas id="game" aria-label="Lanternfall game arena"></canvas>
+
+<div id="hud" class="hidden">
+  <div class="hud-top-left">
+    <div class="hp-row">
+      <span id="level-badge" class="level-badge">Lv 1</span>
+      <div class="hp-bar"><div id="hp-fill"></div></div>
+      <span id="hp-text" class="hp-text">100 / 100</span>
+    </div>
+    <div class="xp-bar"><div id="xp-fill"></div></div>
+  </div>
+  <div class="hud-top-center">
+    <div id="wave-label" class="wave-label">The night begins</div>
+    <div id="boss-bar" class="boss-bar hidden">
+      <span id="boss-name">The Night Herald</span>
+      <div class="boss-track"><div id="boss-fill"></div></div>
+    </div>
+  </div>
+  <div class="hud-top-right">
+    <div class="score-row"><span class="hud-label">Score</span><span id="score-label">0</span></div>
+    <div class="score-row"><span id="kills-label">0 felled</span><span id="clock-label">00:00</span></div>
+  </div>
+  <div class="hud-bottom-left">
+    <div id="dash-pip" class="pip ready"><span class="pip-key">Space</span><span id="dash-text">Dash ×1</span></div>
+    <div id="nova-pip" class="pip ready"><span class="pip-key">Click</span><span id="nova-text">Nova ready</span></div>
+  </div>
+  <div id="combo" class="combo hidden"></div>
+</div>
+
+<div id="banner" class="hidden">
+  <div id="banner-title"></div>
+  <div id="banner-sub"></div>
+</div>
+
+<section id="screen-title" class="screen">
+  <div class="panel title-panel">
+    <p class="eyebrow">A lantern. A courtyard. Ten waves of night.</p>
+    <h1>LANTERNFALL</h1>
+    <p class="subtitle">Keeper of the Last Light</p>
+    <p class="lore">The gloom has swallowed the valley, and every light but one has gone out.
+      You are the keeper of the last lantern. Survive ten waves, gather the starlight
+      of the fallen, and drive the Night Herald back into the dark — before dawn.</p>
+    <div class="controls-grid">
+      <div><strong>WASD / Arrows</strong><span>Move the keeper</span></div>
+      <div><strong>Mouse</strong><span>Aim — bolts fire on their own</span></div>
+      <div><strong>Left click</strong><span>Nova burst (damages + pushes back)</span></div>
+      <div><strong>Space / Shift</strong><span>Dash (briefly untouchable)</span></div>
+      <div><strong>1 / 2 / 3</strong><span>Pick a boon when you level up</span></div>
+      <div><strong>P / Esc · M</strong><span>Pause · Mute</span></div>
+    </div>
+    <button id="start-button" class="big-button">Begin the night</button>
+    <p id="best-line" class="best-line"></p>
+    <p class="footnote">Original game — procedural canvas art, synthesized sound, no downloads. Press Enter to start.</p>
+  </div>
+</section>
+
+<section id="screen-pause" class="screen hidden">
+  <div class="panel">
+    <h2>Paused</h2>
+    <p>The gloom waits. The lantern does not go out.</p>
+    <button id="resume-button" class="big-button">Resume</button>
+    <button id="pause-quit-button" class="ghost-button">Quit to title</button>
+    <p class="footnote">P / Esc resumes · M mutes</p>
+  </div>
+</section>
+
+<section id="screen-levelup" class="screen hidden">
+  <div class="panel levelup-panel">
+    <h2>The lantern grows brighter!</h2>
+    <p>Choose a boon — press 1, 2 or 3, or click a card.</p>
+    <div id="boon-cards" class="boon-cards"></div>
+  </div>
+</section>
+
+<section id="screen-gameover" class="screen hidden">
+  <div class="panel">
+    <p class="eyebrow">The night wins this time</p>
+    <h2>The light goes out…</h2>
+    <p>But dawn always comes again. The courtyard will wait for its keeper.</p>
+    <div id="final-stats" class="stats"></div>
+    <button id="restart-button" class="big-button">Try again</button>
+    <p class="footnote">Press Enter to restart</p>
+  </div>
+</section>
+
+<section id="screen-victory" class="screen hidden">
+  <div class="panel victory-panel">
+    <p class="eyebrow">The Night Herald falls</p>
+    <h2>Dawn breaks!</h2>
+    <div id="victory-stars" class="stars">★★★</div>
+    <p>The gloom scatters before the morning. The valley lights its lanterns again —
+      and yours burns brightest of all.</p>
+    <div id="victory-stats" class="stats"></div>
+    <button id="again-button" class="big-button">Play again</button>
+    <p class="footnote">Press Enter to play again</p>
+  </div>
+</section>
+
+<button id="mute-button" class="mute-button">🔊 Sound on</button>
+<p id="status" class="sr-only" aria-live="polite"></p>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
